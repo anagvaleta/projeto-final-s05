@@ -1,0 +1,285 @@
+/* Definição de Temas */
+:root {
+    --primary-color: #0072bb;
+    --secondary-color: #005f99;
+    --background-color: rgb(216, 216, 216);
+    --text-color: black;
+}
+
+[data-theme="dark"] {
+    --primary-color: #484848;
+    --secondary-color: #282828;
+    --background-color: #121212;
+    --text-color: rgb(0, 0, 0);
+}
+
+
+[data-theme="inatel"] {
+    --primary-color: #1269d0;
+    --secondary-color: #005f99;
+    --background-color: #edf1f4;
+    --text-color: #000;
+}
+
+body {
+    font-family: 'Arimo', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+span {
+    color: var(--secondary-color);
+}
+
+header {
+    padding-top: 20px;
+    width: 100%; /* Garante que o header ocupe toda a largura */
+    display: flex;
+    justify-content: center; /* Caso queira centralizar o conteúdo */
+    align-items: center; /* Alinha os itens verticalmente no centro */
+}
+
+
+h3 {
+    font-family: "Arimo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    color: var(--primary-color);
+    padding-left: 5px;
+    padding-right: 5px
+}
+
+p {
+    font-family: "Arimo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 11px;
+    color: var(--cor-text);
+    line-height: 1.5;
+    orphans: 3;
+    padding-left: 5px;
+    padding-right: 5px
+}
+
+
+.carousel-container {
+        position: relative;
+        overflow: hidden;
+        background-color: white;
+        border-radius: 10px;
+        margin: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1)
+}
+
+.carousel {
+    display: flex; /* faça essa alteração */
+    transition: transform 0.5s ease-in-out; /* inclua a animação */
+}
+
+
+.card {
+    min-width: 100%;
+    text-align: center;
+    background-color: #fff;
+}
+
+.card img {
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.info {
+    padding: 10px
+}
+
+.icon {
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 2px;
+    width: 18px;
+    display: inline-block;
+    vertical-align: middle
+}
+
+
+button {
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+    background: var(--secondary-color);
+    color: white;
+    border-radius: 5px;
+    margin-top: 1vh;
+    margin-right: 28.5vh;
+}
+
+#prevBtn {  
+
+    position: absolute;
+    top: 10px;  /* Ajuste a posição vertical */
+    padding: 10px;
+    cursor: pointer;
+    z-index: 100;  /* Garante que as setas fiquem acima das imagens */
+}
+#nextBtn { 
+    margin-left: 36vh; 
+    position: absolute;
+    top: 10px;  /* Ajuste a posição vertical */
+    padding: 10px;
+    cursor: pointer;
+    z-index: 100;  /* Garante que as setas fiquem acima das imagens */
+}
+
+
+button:hover {
+    background: var(--primary-color);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background: #b6b6b6;
+}
+
+.theme-btn {
+    margin: 5px;
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: black;
+}
+
+.theme-btn:hover {
+    background: #ddd;
+}
+
+.hidden {
+    display: none;
+    z-index: 999;
+}
+
+.text-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+    padding: 0 10px; 
+}
+
+/* Menu Container */
+.menu-container {
+    display: flex;
+    justify-content: space-between;  /* Espaço entre os itens */
+    align-items: center;             /* Centraliza os itens verticalmente */
+    position: relative;              /* Importante para o menu não afetar o layout */
+    width: 100%;
+    padding: 10px;
+}
+
+/* Ícones e logo */
+.menu-container .material-icons-outlined, .svg_logo_inatel {
+    margin: 0 10px;   /* Espaçamento entre os itens */
+}
+
+/* Menu oculto (inicialmente fechado) */
+#menu {
+    display: none;  /* Inicialmente o menu está oculto */
+    flex-direction: column; /* Menu em coluna */
+    gap: 10px; /* Espaço entre os itens do menu */
+    position: absolute; /* Evita que o menu afete o layout dos itens */
+    top: 100%;  /* Coloca o menu logo abaixo do header */
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+
+/* Menu visível (quando o menu está aberto) */
+#menu.show {
+    display: flex;  /* Exibe o menu quando a classe 'show' for adicionada */
+}
+
+/* Botões de menu */
+.menu-item {
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 896px) {
+    .text-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around; /* Ajusta para distribuir os itens */
+    }
+
+    .svg_logo_inatel {
+        width: 100px; /* Ajuste o tamanho do logo */
+        fill: var(--primary-color); /* Cor do SVG */
+    }
+
+    .mensagens, .aulas, .noticias {
+        padding: 10px;
+    }
+
+    .aulas-container {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .noticias h1 {
+        font-size: 20px;
+    }
+
+    .mensagens {
+        overflow: hidden;
+        background-color: white;
+        border-radius: 10px;
+        margin: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .titulo-container h1 {
+        font-weight: 300;
+    }
+
+    .mensagem p {
+        font-size: 16px;
+        margin: 0;
+    }
+    
+    .mensagem {
+        display: flex;              
+        align-items: center;        
+        margin: 0;    
+        gap: 10px;            
+    }
+
+    .mensagens-container {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .noticias h1 {
+        text-align: center;
+        color: var(--primary-color);
+        text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+}
+
+
