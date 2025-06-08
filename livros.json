@@ -1,0 +1,12 @@
+[
+  { "id": 1, "titulo": "O Pequeno Príncipe", "disponivel": true },
+  { "id": 2, "titulo": "Dom Casmurro", "disponivel": false },
+  { "id": 3, "titulo": "A Redoma de Vidro", "disponivel": true },
+  { "id": 4, "titulo": "Revolução dos Bichos", "disponivel": true },
+  { "id": 5, "titulo": "1984", "disponivel": false },
+  { "id": 6, "titulo": "O Morro dos Ventos Uivantes", "disponivel": true },
+  { "id": 7, "titulo": "Capitães da Areia", "disponivel": true },
+  { "id": 8, "titulo": "Harry Potter e a Pedra Filosofal", "disponivel": false },
+  { "id": 9, "titulo": "O Hobbit", "disponivel": true },
+  { "id": 10, "titulo": "Orgulho e Preconceito", "disponivel": false }
+]

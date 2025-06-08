@@ -136,23 +136,125 @@ const mensagemDiv = document.querySelector('.mensagem');
 
 let carrinho = [];
 
-    botoesAdicionar.forEach(botao => {
-      botao.addEventListener('click', () => {
-        const livro = botao.parentElement;
-        const titulo = livro.dataset.titulo;
-        carrinho.push(titulo);
+document.addEventListener('DOMContentLoaded', () => {
+  const livrosPorPagina = 3;
+  let paginaAtual = 1;
+  let todosLivros = [];
+  let livrosFiltrados = [];
+
+  const container = document.getElementById('lista-livros');
+  const barraPesquisa = document.getElementById('barra-pesquisa');
+
+ function mostrarLivrosPagina(pagina) {
+  container.innerHTML = '';
+
+  const inicio = (pagina - 1) * livrosPorPagina;
+  const fim = inicio + livrosPorPagina;
+  const livrosPagina = livrosFiltrados.slice(inicio, fim);
+
+  livrosPagina.forEach(livro => {
+    const div = document.createElement('div');
+    div.className = 'livro';
+    div.dataset.titulo = livro.titulo;
+
+    const status = livro.disponivel ? 'Disponível' : 'Indisponível';
+    const statusClass = livro.disponivel ? 'disponivel' : 'indisponivel';
+
+    div.innerHTML = `
+      <h3><strong>${livro.titulo}</strong></h3>
+      <p>Status: <span class="${statusClass}">${status}</span></p>
+      <button class="adicionar-carrinho" ${!livro.disponivel ? 'disabled' : ''}>
+        ${livro.disponivel ? 'Adicionar ao carrinho' : 'Indisponível'}
+      </button>
+    `;
+
+    container.appendChild(div);
+  });
+
+  // Agora adiciona o event listener para os botões criados
+  const botoesAdicionar = container.querySelectorAll('.adicionar-carrinho');
+  botoesAdicionar.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      const livroSelecionado = livrosPagina[index];
+      if (!carrinho.includes(livroSelecionado.titulo)) {
+        carrinho.push(livroSelecionado.titulo);
         atualizarCarrinho();
-      });
+        atualizarDados();
+      } else {
+        alert('Livro já está no carrinho.');
+      }
+    });
+  });
+
+  atualizarBotoes();
+}
+  function atualizarBotoes() {
+    btnAnterior.disabled = paginaAtual === 1;
+    btnProximo.disabled = paginaAtual === Math.ceil(livrosFiltrados.length / livrosPorPagina);
+  }
+
+  function filtrarLivros(termo) {
+    livrosFiltrados = todosLivros.filter(livro =>
+      livro.titulo.toLowerCase().includes(termo.toLowerCase())
+    );
+    paginaAtual = 1;
+    mostrarLivrosPagina(paginaAtual);
+  }
+
+  const btnAnterior = document.createElement('button');
+  btnAnterior.textContent = 'Anterior';
+  btnAnterior.addEventListener('click', () => {
+    if (paginaAtual > 1) {
+      paginaAtual--;
+      mostrarLivrosPagina(paginaAtual);
+    }
+  });
+
+  const btnProximo = document.createElement('button');
+  btnProximo.textContent = 'Próximo';
+  btnProximo.addEventListener('click', () => {
+    if (paginaAtual < Math.ceil(livrosFiltrados.length / livrosPorPagina)) {
+      paginaAtual++;
+      mostrarLivrosPagina(paginaAtual);
+    }
+  });
+
+  const divBotoes = document.createElement('div');
+  divBotoes.className = 'paginacao-botoes';
+
+  divBotoes.appendChild(btnAnterior);
+  divBotoes.appendChild(btnProximo);
+
+  container.parentNode.appendChild(divBotoes);
+
+  fetch('livros.json')
+    .then(res => res.json())
+    .then(livros => {
+      todosLivros = livros;
+      livrosFiltrados = livros; // inicialmente todos
+      mostrarLivrosPagina(paginaAtual);
+    })
+    .catch(err => {
+      container.innerHTML = 'Erro ao carregar os livros.';
+      console.error(err);
     });
 
-    function atualizarCarrinho() {
-      listaCarrinho.innerHTML = '';
-      carrinho.forEach(titulo => {
-        const li = document.createElement('li');
-        li.textContent = titulo;
-        listaCarrinho.appendChild(li);
-      });
-    }
+  barraPesquisa.addEventListener('input', () => {
+    const termo = barraPesquisa.value;
+    filtrarLivros(termo);
+  });
+});
+
+  
+function atualizarCarrinho() {
+  const listaCarrinho = document.getElementById('lista-carrinho');
+  listaCarrinho.innerHTML = '';
+  carrinho.forEach(titulo => {
+    const li = document.createElement('li');
+    li.textContent = titulo;
+    listaCarrinho.appendChild(li);
+  });
+}
 
     function atualizarDados() {
     returnDate = new Date();

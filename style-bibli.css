@@ -417,6 +417,69 @@ nav {
         text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
 
+    #barra-pesquisa {
+        width: 80%;
+        max-width: 400px;
+        padding: 10px 15px;
+        margin: 20px auto;
+        display: block;
+        border: 2px solid #0085a7;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s ease;
     }
+
+    #barra-pesquisa:focus {
+        border-color: #005f70;
+        box-shadow: 0 0 5px rgba(0, 133, 167, 0.5);
+    }
+
+    #carrossel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    }
+
+    .disponivel {
+    color: green;
+    }
+
+    .indisponivel {
+    color: red;
+    }
+
+    .paginacao-botoes {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center; /* centraliza o grid */
+    }
+
+    .paginacao-botoes button {
+    margin: 0;      /* remove margens */
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #333;
+    }
+
+    .paginacao-botoes button + button {
+    border-left: none; /* remove borda entre os dois botões para ficarem "colados" */
+    }
+
+    .paginacao-botoes button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    }
+
+    .paginacao-botoes button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    }
+
+}
 
 
